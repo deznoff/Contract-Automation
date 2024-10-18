@@ -1,0 +1,19 @@
+---
+- name: ACI Link Level Management
+  hosts: APIC
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: test play to view the contract
+      cisco.aci.aci_contract_subject_to_filter:
+        host: 10.10.20.14
+        username: '{{ user }}'
+        password: '{{ password }}'
+        validate_certs: false
+        tenant: Heroes
+        contract: batman_vzAny
+        subject: SUB-vzAny
+        filter: Permit-IP-ANY
+        state: present
+      delegate_to: localhost
